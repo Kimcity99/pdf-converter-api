@@ -3,10 +3,9 @@ const multer = require("multer");
 const { PDFDocument } = require("pdf-lib");
 const fs = require("fs");
 const path = require("path");
-const { fromPath } = require("pdf2pic"); // Import pdf2pic for PDF to JPG conversion
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // Use dynamic port for Render
 
 // Middleware
 app.use(express.json());
@@ -55,34 +54,6 @@ app.post("/convert/image-to-pdf", upload.single("image"), async (req, res) => {
         res.send(Buffer.from(pdfBytes));
     } catch (error) {
         res.status(500).json({ error: "Error converting image to PDF" });
-    }
-});
-
-// Convert PDF to JPG
-app.post("/convert/pdf-to-jpg", upload.single("pdf"), async (req, res) => {
-    try {
-        if (!req.file) return res.status(400).json({ error: "No PDF file uploaded" });
-
-        // Set up PDF to JPG conversion options
-        const convert = fromPath(req.file.path, {
-            density: 100,
-            saveFilename: "output",
-            savePath: "uploads/",
-            format: "jpg",
-            width: 1024,
-            height: 1024,
-        });
-
-        // Convert the first page to JPG
-        convert(1).then((resolve) => {
-            res.setHeader("Content-Type", "image/jpeg");
-            res.sendFile(resolve.path, { root: __dirname });
-        }).catch((error) => {
-            res.status(500).json({ error: "Error converting PDF to JPG" });
-        });
-
-    } catch (error) {
-        res.status(500).json({ error: "Error converting PDF to JPG" });
     }
 });
 
