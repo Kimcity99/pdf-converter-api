@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PDF Converter</h1>
+
+        <!-- Text to PDF Form -->
+        <div class="form-container">
+            <h2>Convert Text to PDF</h2>
+            <textarea id="textInput" placeholder="Enter text here..."></textarea>
+            <button id="convertTextBtn">Convert to PDF</button>
+        </div>
+
+        <!-- Image to PDF Form -->
+        <div class="form-container">
+            <h2>Convert Image to PDF</h2>
+            <input type="file" id="imageInput" accept="image/*">
+            <button id="convertImageBtn">Convert to PDF</button>
+        </div>
+
+        <!-- Download Link -->
+        <div id="downloadLink" style="display:none;">
+            <a href="" id="pdfDownload">Download PDF</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
