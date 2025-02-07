@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://pdf-converter-api.onrender.com";  // Update this
+const API_BASE_URL = "https://pdf-converter-api-6blm.onrender.com";  // Use the correct URL from Render
 
 document.getElementById("convertTextBtn").addEventListener("click", async function () {
     const text = document.getElementById("textInput").value;
@@ -8,7 +8,7 @@ document.getElementById("convertTextBtn").addEventListener("click", async functi
         return;
     }
 
-    const response = await fetch(`${API_BASE_URL}/convert/text-to-pdf`, {  // Use the full API URL
+    const response = await fetch(`${API_BASE_URL}/convert/text-to-pdf`, {  // Use the correct Render URL
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -25,6 +25,7 @@ document.getElementById("convertTextBtn").addEventListener("click", async functi
         alert("Failed to convert text to PDF.");
     }
 });
+
 
 
 document.getElementById("convertImageBtn").addEventListener("click", async function() {
