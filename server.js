@@ -5,11 +5,11 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const port = 5000;
+const PORT = process.env.PORT || 5000; // Use dynamic port for Render
 
 // Middleware
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));  // Serve static files from 'public'
+app.use(express.static(path.join(__dirname, "public"))); // Serve static files from 'public'
 
 // Home route
 app.get("/", (req, res) => {
@@ -23,6 +23,8 @@ const upload = multer({ dest: "uploads/" });
 app.post("/convert/text-to-pdf", async (req, res) => {
     try {
         const { text } = req.body;
+        if (!text) return res.status(400).json({ error: "Text is required" });
+
         const pdfDoc = await PDFDocument.create();
         const page = pdfDoc.addPage([600, 400]);
         page.drawText(text, { x: 50, y: 350 });
@@ -56,6 +58,6 @@ app.post("/convert/image-to-pdf", upload.single("image"), async (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
-    console.log(`PDF Converter API running at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`PDF Converter API running at http://localhost:${PORT}`);
 });
