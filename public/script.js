@@ -1,3 +1,5 @@
+const API_BASE_URL = "https://pdf-converter-api.onrender.com"; // Use the live URL from Render
+
 document.getElementById("convertTextBtn").addEventListener("click", async function() {
     const text = document.getElementById("textInput").value;
 
@@ -6,7 +8,7 @@ document.getElementById("convertTextBtn").addEventListener("click", async functi
         return;
     }
 
-    const response = await fetch("http://localhost:5000/convert/text-to-pdf", {
+    const response = await fetch(`${API_BASE_URL}/convert/text-to-pdf`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -35,7 +37,7 @@ document.getElementById("convertImageBtn").addEventListener("click", async funct
 
     formData.append("image", imageInput.files[0]);
 
-    const response = await fetch("http://localhost:5000/convert/image-to-pdf", {
+    const response = await fetch(`${API_BASE_URL}/convert/image-to-pdf`, {
         method: "POST",
         body: formData
     });
